@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar-like Scheduling Page</title>
+  <style>
+    /* Add your custom CSS styling here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td, th {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calendar-like Scheduling Page</h1>
+  <div id="calendar"></div>
+  
+  <script>
+    // Add your custom JavaScript code here
+    function createCalendar(date) {
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const weeksInMonth = 6;
+      let currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
+
+      let calendarHtml = '<table>';
+      calendarHtml += '<tr>';
+      for (const day of days) {
+        calendarHtml += `<th>${day}</th>`;
+      }
+      calendarHtml += '</tr>';
+      
+      for (let i = 0; i < weeksInMonth; i++) {
+        calendarHtml += '<tr>';
+        for (let j = 0; j < 7; j++) {
+          if (currentDate.getMonth() === date.getMonth()) {
+            calendarHtml += `<td>${currentDate.getDate()}</td>`;
+            currentDate.setDate(currentDate.getDate() + 1);
+          } else {
+            calendarHtml += '<td></td>';
+          }
+        }
+        calendarHtml += '</tr>';
+      }
+      
+      calendarHtml += '</table>';
+      return calendarHtml;
+    }
+    
+    const calendarDiv = document.getElementById('calendar');
+    calendarDiv.innerHTML = createCalendar(new Date());
+  </script>
+</body>
+</html>
